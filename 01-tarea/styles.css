@@ -1,0 +1,64 @@
+:root {
+    --fondo: #0f1116;
+    --tarjeta: #191c24;
+    --borde: #262b36;
+    --texto: #e8eaf0;
+    --texto-gris: #8b93a7;
+    --amarillo: #fff235;
+    --esquinas: 14px;
+    --letra: system-ui, sans-serif;
+  }
+  
+  body {
+    font-family: var(--letra);
+    background-color: var(--fondo);
+    color: var(--texto);
+    margin: 0;
+  }
+  
+  .encabezado {
+    padding: 40px 20px;
+    text-align: center;
+    border-bottom: 1px solid var(--borde);
+  }
+  
+  .titulo {
+    font-size: 40px;
+    margin: 0;
+  }
+    
+  .contenedor {
+    width: 1000px;
+    margin: 0 auto;
+    padding: 30px 0;
+  }
+  
+  .lista {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .lista li {
+    width: 180px;
+    height: 180px;
+    margin: 10px;
+    padding: 15px;
+    background-color: var(--tarjeta);
+    border: 1px solid var(--borde);
+    border-radius: var(--esquinas);
+    text-align: center;
+    transition: border-color 0.15s;
+  }
+  
+  .lista li:hover {
+    border-color: var(--amarillo);
+  }
+  
+  .lista img {
+    width: 96px;
+    height: 96px;
+    display: block;
+    margin: 0 auto;
+  }
