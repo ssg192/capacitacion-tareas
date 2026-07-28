@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-
 	let { data }: { data: PageData } = $props();
 </script>
 
@@ -10,10 +9,8 @@
 	{#each data.characters as character (character.id)}
 		<div class="card">
 			<img src={character.image} alt={character.name} />
-
 			<div class="content">
-				<h2>{character.name}</h2>
-
+				<h2>Nombre:{character.name}</h2>
 				<p>Especie: {character.species}</p>
 				<p>Tipo: {character.type || 'Desconocido'}</p>
 			</div>
