@@ -18,7 +18,10 @@
 	async function findPokemons(): Promise<PokemonListItem[]> {
 		try {
 			const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=30');
-			if (!response.ok) throw new Error('Error en la petición');
+			if (!response.ok)
+				{
+					throw new Error('Error en la petición');
+				}
 			const data = await response.json();
 			return data.results;
 		} catch (error) {
@@ -30,7 +33,9 @@
 	async function findPokemon(url: string): Promise<PokemonDetail | null> {
 		try {
 			const response = await fetch(url);
-			if (!response.ok) throw new Error('Error en la petición');
+			if (!response.ok){
+				throw new Error('Error en la petición');
+			}
 			return await response.json();
 		} catch (error) {
 			console.error('Error al obtener el detalle:', error);
