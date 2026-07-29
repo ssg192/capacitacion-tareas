@@ -8,7 +8,7 @@
     }
 </script>
 
-<div class="flex min-h-screen items-center justify-center bg-slate-900">
+<div class="flex h-screen items-center justify-center bg-slate-900">
     <div class="w-full max-w-sm rounded-2xl bg-slate-800 p-8 shadow-xl">
         <h1 class="mb-6 text-center text-2xl font-bold text-white">Login</h1>
 
