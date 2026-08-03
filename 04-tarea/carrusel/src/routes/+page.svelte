@@ -11,7 +11,6 @@
 
 	function next() {
 		current++;
-
 		if (current >= data.apods.length) {
 			current = 0;
 		}
@@ -44,7 +43,6 @@
 		if (playing) {
 			return;
 		}
-
 		playing = true;
 		start();
 	}
@@ -67,14 +65,13 @@
 		<div class="flex-1 min-w-0">
 			{#each data.apods as apod, i}
 				{#if i === current}
-					<Card.Root class="overflow-hidden bg-slate-900/70 border-slate-700/30 shadow-2xl">
+					<Card.Root class="overflow-hidden bg-slate-900 border-slate-700 shadow-2xl">
 						<Card.Content class="p-0">
 							<img src={apod.url} alt={apod.title}
 								class="w-full max-h-105 object-cover"/>
 						</Card.Content>
-						<Card.Footer class="flex-col items-start p-6 gap-1">
+						<Card.Footer class="flex-col items-center p-6 gap-1 text-center">
 							<Card.Title class="text-white">{apod.title}</Card.Title>
-							<span class="text-xs text-white"> {apod.date}</span>
 						</Card.Footer>
 					</Card.Root>
 				{/if}
@@ -91,8 +88,7 @@
 		<button
 			onclick={() => changePage(i)}
 			aria-label={`Ir a la imagen ${i + 1}`}
-			class={i === current
-				? 'h-3 w-3 rounded-full bg-white'
+			class={i === current? 'h-3 w-3 rounded-full bg-white'
 				: 'h-3 w-3 rounded-full bg-gray-500'}
 		></button>
 	{/each}
