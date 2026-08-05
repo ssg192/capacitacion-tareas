@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Agendar Cita - PawPath</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed": "#cee5ff",
+                    "surface": "#fbf9f8",
+                    "tertiary": "#685d47",
+                    "tertiary-container": "#dacbb0",
+                    "inverse-primary": "#a1d1bf",
+                    "surface-tint": "#3a6758",
+                    "secondary": "#396285",
+                    "surface-bright": "#fbf9f8",
+                    "on-background": "#1b1c1c",
+                    "tertiary-fixed": "#f1e1c5",
+                    "inverse-on-surface": "#f2f0f0",
+                    "on-tertiary-fixed": "#221b09",
+                    "background": "#fbf9f8",
+                    "primary-fixed-dim": "#a1d1bf",
+                    "on-secondary-fixed": "#001d32",
+                    "surface-container-highest": "#e4e2e2",
+                    "primary-fixed": "#bcedda",
+                    "on-primary": "#ffffff",
+                    "outline-variant": "#c0c8c3",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary-container": "#605540",
+                    "surface-dim": "#dbd9d9",
+                    "surface-variant": "#e4e2e2",
+                    "inverse-surface": "#303030",
+                    "on-error-container": "#93000a",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-high": "#eae8e7",
+                    "on-primary-fixed-variant": "#214f41",
+                    "on-surface": "#1b1c1c",
+                    "primary": "#3a6758",
+                    "on-primary-fixed": "#002118",
+                    "on-tertiary-fixed-variant": "#504631",
+                    "surface-container-low": "#f5f3f3",
+                    "surface-container": "#efeded",
+                    "secondary-container": "#aed6fe",
+                    "on-secondary-container": "#345d80",
+                    "on-secondary": "#ffffff",
+                    "on-surface-variant": "#404945",
+                    "secondary-fixed-dim": "#a3cbf3",
+                    "error": "#ba1a1a",
+                    "on-error": "#ffffff",
+                    "tertiary-fixed-dim": "#d4c5aa",
+                    "primary-container": "#a7d7c5",
+                    "outline": "#717975",
+                    "error-container": "#ffdad6",
+                    "on-primary-container": "#325f51",
+                    "on-secondary-fixed-variant": "#1f4a6c"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "section-margin": "40px",
+                    "element-gap": "16px",
+                    "base": "8px",
+                    "container-padding": "24px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Quicksand"],
+                    "headline-lg": ["Quicksand"],
+                    "label-md": ["Quicksand"],
+                    "headline-md": ["Quicksand"],
+                    "body-lg": ["Quicksand"],
+                    "body-md": ["Quicksand"],
+                    "label-sm": ["Quicksand"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["26px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                    "headline-md": ["24px", {"lineHeight": "30px", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "500"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #fbf9f8;
+            font-family: 'Quicksand', sans-serif;
+            color: #1b1c1c;
+        }
+
+        .clay-card {
+            background: #ffffff;
+            border-radius: 2rem;
+            box-shadow: 
+                20px 20px 60px #d9d7d6,
+                -20px -20px 60px #ffffff,
+                inset 4px 4px 12px rgba(255,255,255,0.8),
+                inset -4px -4px 12px rgba(0,0,0,0.05);
+        }
+
+        .clay-button-primary {
+            background: #3a6758;
+            color: white;
+            box-shadow: 
+                0 10px 20px rgba(58, 103, 88, 0.2),
+                inset 4px 4px 8px rgba(255,255,255,0.3),
+                inset -4px -4px 8px rgba(0,0,0,0.2);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .clay-button-primary:active {
+            transform: scale(0.95);
+            box-shadow: 
+                inset 6px 6px 12px rgba(0,0,0,0.2),
+                inset -6px -6px 12px rgba(255,255,255,0.1);
+        }
+
+        .clay-button-secondary {
+            background: #efeded;
+            color: #404945;
+            box-shadow: 
+                8px 8px 16px #d1cfce,
+                -8px -8px 16px #ffffff,
+                inset 2px 2px 5px rgba(255,255,255,0.8),
+                inset -2px -2px 5px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .clay-input-inset {
+            background: #f5f3f3;
+            border: none;
+            box-shadow: 
+                inset 6px 6px 12px rgba(0,0,0,0.08),
+                inset -6px -6px 12px rgba(255,255,255,0.8);
+            border-radius: 1.5rem;
+        }
+
+        .clay-input-inset:focus {
+            outline: none;
+            box-shadow: 
+                inset 8px 8px 16px rgba(0,0,0,0.1),
+                inset -8px -8px 16px rgba(255,255,255,0.9);
+            ring: 0;
+        }
+
+        .clay-pill-active {
+            background: #a7d7c5;
+            color: #325f51;
+            box-shadow: 
+                4px 4px 8px rgba(0,0,0,0.05),
+                inset 2px 2px 4px rgba(255,255,255,0.5);
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+
+        .clay-thumb {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            box-shadow: 
+                4px 4px 10px rgba(0,0,0,0.1),
+                inset 2px 2px 4px rgba(255,255,255,0.6);
+        }
+
+        /* Floating Animation */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float { animation: float 4s ease-in-out infinite; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+<!-- TopNavBar (Shared Component Guide) -->
+<header class="w-full top-0 px-container-padding py-4 bg-surface shadow-[0_10px_30px_rgba(58,103,88,0.1)] sticky z-50">
+<div class="flex justify-between items-center max-w-[1200px] mx-auto">
+<div class="flex items-center gap-3">
+<div class="bg-primary-container p-2 rounded-xl shadow-[4px_4px_10px_rgba(0,0,0,0.1)]">
+<span class="material-symbols-outlined text-primary text-3xl">pets</span>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary font-bold">PawPath</h1>
+</div>
+<nav class="hidden md:flex gap-4">
+<a class="text-on-surface-variant px-4 py-1 hover:scale-105 transition-transform duration-300" href="#">Dashboard</a>
+<a class="text-on-surface-variant px-4 py-1 hover:scale-105 transition-transform duration-300" href="#">My Pets</a>
+<a class="text-primary font-bold border-b-4 border-primary rounded-full px-4 py-1 transition-all" href="#">Agendar</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-primary text-2xl active:scale-95 transition-all">notifications</button>
+<div class="clay-thumb bg-secondary-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Close up portrait of a smiling young woman with a warm, approachable look, wearing casual stylish veterinary scrubs. The background is a soft-focus, brightly lit modern clinic interior with warm sandy tones and mint green accents, maintaining a claymorphic, soft-depth aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwpPo0teBIb8fOOq3MaQRd24JmH0CH8_p2GLPfm1dWkXGOufTV4wseMlm8NLC3x_aFCicqfqrSkklHIs7qvRppQb9TceSfVbbhxe4OQ0ALCXmPQucf8ty41jrXWf2J2WMNSEsMfG8WgSrs2s1-XZd2TaqrH89x3oc7mdHpfy7Y66V6GJG-_feuFv7g42taHGH08j7SVki2RwsO7sv-qvTGhEtnzy504kv-p6BrDuwocoGQaWQwl0L1"/>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-grow flex items-center justify-center p-6 md:p-12">
+<div class="max-w-4xl w-full grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+<!-- Hero Decorative Side (Desktop) -->
+<div class="hidden md:flex md:col-span-5 flex-col gap-6 pt-12">
+<h2 class="font-headline-lg text-headline-lg text-primary animate-float">Cuidamos lo que más amas.</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Completa los detalles para agendar la próxima visita de tu compañero. Nuestro equipo está listo para recibirlos.</p>
+<div class="clay-card p-6 mt-8 relative overflow-hidden">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-secondary-container opacity-20 rounded-full blur-xl"></div>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-primary-container rounded-full flex items-center justify-center shadow-inner">
+<span class="material-symbols-outlined text-primary">verified_user</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-primary">Atención Certificada</p>
+<p class="text-xs text-on-surface-variant">Especialistas en bienestar animal</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Form Container -->
+<div class="md:col-span-7 w-full">
+<div class="clay-card p-8 md:p-10">
+<div class="mb-8">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Agendar Cita</h3>
+<div class="h-1.5 w-16 bg-primary rounded-full"></div>
+</div>
+<form class="flex flex-col gap-6" onsubmit="return false;">
+<!-- Pet Selection -->
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-label-md text-on-surface-variant px-2">Selecciona tu mascota</label>
+<div class="relative">
+<select class="clay-input-inset w-full p-4 font-body-md text-body-md appearance-none">
+<option disabled="" selected="" value="">Elige un integrante...</option>
+<option value="1">Luna (Golden Retriever)</option>
+<option value="2">Milo (Gato Persa)</option>
+<option value="3">Rex (Pastor Alemán)</option>
+</select>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">expand_more</span>
+</div>
+</div>
+<!-- Reason -->
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-label-md text-on-surface-variant px-2">Motivo de la visita</label>
+<textarea class="clay-input-inset w-full p-4 font-body-md text-body-md resize-none" placeholder="¿Cómo podemos ayudar hoy?" rows="3"></textarea>
+</div>
+<!-- Date and Time Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-label-md text-on-surface-variant px-2">Fecha</label>
+<div class="relative">
+<input class="clay-input-inset w-full p-4 font-body-md text-body-md" type="date"/>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">calendar_today</span>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-label-md text-on-surface-variant px-2">Hora sugerida</label>
+<div class="relative">
+<select class="clay-input-inset w-full p-4 font-body-md text-body-md appearance-none">
+<option>09:00 AM</option>
+<option>10:30 AM</option>
+<option>02:00 PM</option>
+<option>04:30 PM</option>
+</select>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">schedule</span>
+</div>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="flex flex-col sm:flex-row gap-4 mt-4">
+<button class="clay-button-primary flex-1 py-4 px-6 rounded-xl font-label-md text-label-md flex items-center justify-center gap-2" type="submit">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                Confirmar Cita
+                            </button>
+<button class="clay-button-secondary flex-1 py-4 px-6 rounded-xl font-label-md text-label-md flex items-center justify-center gap-2" type="button">
+<span class="material-symbols-outlined">cancel</span>
+                                Cancelar
+                            </button>
+</div>
+</form>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<footer class="md:hidden fixed bottom-0 w-full z-50 flex justify-around items-center px-4 py-3 pb-safe bg-surface-container shadow-[0_-10px_30px_rgba(0,0,0,0.05)] rounded-t-lg">
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-6 py-2" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl px-6 py-2 shadow-[4px_4px_10px_rgba(0,0,0,0.1)]" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add_circle</span>
+<span class="font-label-md text-label-md">Agendar</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-6 py-2" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md">Perfil</span>
+</a>
+</footer>
+<div class="h-20 md:hidden"></div> <!-- Spacer for mobile nav -->
+<script>
+        // Simple micro-interaction for input fields
+        const inputs = document.querySelectorAll('.clay-input-inset');
+        inputs.forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.style.transform = 'translateY(-2px)';
+                input.parentElement.style.transition = 'transform 0.3s ease';
+            });
+            input.addEventListener('blur', () => {
+                input.parentElement.style.transform = 'translateY(0px)';
+            });
+        });
+
+        // Date picker default today
+        const dateInput = document.querySelector('input[type="date"]');
+        if(dateInput) {
+            const today = new Date().toISOString().split('T')[0];
+            dateInput.value = today;
+        }
+    </script>
+</body></html>

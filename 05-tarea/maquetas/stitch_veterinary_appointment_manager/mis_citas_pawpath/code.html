@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PawPath - Dashboard Veterinario</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Shared Style Context (Claymorphism Tokens) -->
+<style>
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background-color: #fbf9f8;
+            color: #1b1c1c;
+        }
+
+        .clay-card {
+            background: #ffffff;
+            border-radius: 2rem;
+            box-shadow: 
+                0 10px 30px rgba(58, 103, 88, 0.08),
+                inset 4px 4px 12px rgba(255, 255, 255, 0.8),
+                inset -4px -4px 16px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .clay-card:hover {
+            transform: translateY(-4px) scale(1.01);
+            box-shadow: 
+                0 15px 35px rgba(58, 103, 88, 0.12),
+                inset 6px 6px 14px rgba(255, 255, 255, 0.9),
+                inset -6px -6px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .clay-button-primary {
+            background: #3a6758;
+            color: white;
+            box-shadow: 
+                0 8px 20px rgba(58, 103, 88, 0.2),
+                inset 4px 4px 8px rgba(255, 255, 255, 0.3),
+                inset -4px -4px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.2s ease;
+        }
+
+        .clay-button-primary:active {
+            transform: scale(0.95);
+            box-shadow: 
+                0 4px 10px rgba(58, 103, 88, 0.2),
+                inset 6px 6px 12px rgba(0, 0, 0, 0.3),
+                inset -4px -4px 8px rgba(255, 255, 255, 0.1);
+        }
+
+        .clay-inset {
+            background: #efeded;
+            box-shadow: 
+                inset 4px 4px 8px rgba(0, 0, 0, 0.05),
+                inset -4px -4px 8px rgba(255, 255, 255, 0.8);
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        /* Subtle Background Atmosphere */
+        .bg-blob {
+            position: fixed;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.4;
+            border-radius: 50%;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "secondary-fixed": "#cee5ff",
+                      "surface": "#fbf9f8",
+                      "tertiary": "#685d47",
+                      "tertiary-container": "#dacbb0",
+                      "inverse-primary": "#a1d1bf",
+                      "surface-tint": "#3a6758",
+                      "secondary": "#396285",
+                      "surface-bright": "#fbf9f8",
+                      "on-background": "#1b1c1c",
+                      "tertiary-fixed": "#f1e1c5",
+                      "inverse-on-surface": "#f2f0f0",
+                      "on-tertiary-fixed": "#221b09",
+                      "background": "#fbf9f8",
+                      "primary-fixed-dim": "#a1d1bf",
+                      "on-secondary-fixed": "#001d32",
+                      "surface-container-highest": "#e4e2e2",
+                      "primary-fixed": "#bcedda",
+                      "on-primary": "#ffffff",
+                      "outline-variant": "#c0c8c3",
+                      "surface-container-lowest": "#ffffff",
+                      "on-tertiary-container": "#605540",
+                      "surface-dim": "#dbd9d9",
+                      "surface-variant": "#e4e2e2",
+                      "inverse-surface": "#303030",
+                      "on-error-container": "#93000a",
+                      "on-tertiary": "#ffffff",
+                      "surface-container-high": "#eae8e7",
+                      "on-primary-fixed-variant": "#214f41",
+                      "on-surface": "#1b1c1c",
+                      "primary": "#3a6758",
+                      "on-primary-fixed": "#002118",
+                      "on-tertiary-fixed-variant": "#504631",
+                      "surface-container-low": "#f5f3f3",
+                      "surface-container": "#efeded",
+                      "secondary-container": "#aed6fe",
+                      "on-secondary-container": "#345d80",
+                      "on-secondary": "#ffffff",
+                      "on-surface-variant": "#404945",
+                      "secondary-fixed-dim": "#a3cbf3",
+                      "error": "#ba1a1a",
+                      "on-error": "#ffffff",
+                      "tertiary-fixed-dim": "#d4c5aa",
+                      "primary-container": "#a7d7c5",
+                      "outline": "#717975",
+                      "error-container": "#ffdad6",
+                      "on-primary-container": "#325f51",
+                      "on-secondary-fixed-variant": "#1f4a6c"
+              },
+              "borderRadius": {
+                      "DEFAULT": "1rem",
+                      "lg": "2rem",
+                      "xl": "3rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "section-margin": "40px",
+                      "element-gap": "16px",
+                      "base": "8px",
+                      "container-padding": "24px"
+              },
+              "fontFamily": {
+                      "headline-lg-mobile": ["Quicksand"],
+                      "headline-lg": ["Quicksand"],
+                      "label-md": ["Quicksand"],
+                      "headline-md": ["Quicksand"],
+                      "body-lg": ["Quicksand"],
+                      "body-md": ["Quicksand"],
+                      "label-sm": ["Quicksand"]
+              },
+              "fontSize": {
+                      "headline-lg-mobile": ["26px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                      "headline-md": ["24px", {"lineHeight": "30px", "fontWeight": "600"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "500"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "500"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "700"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="min-h-screen pb-24 md:pb-0">
+<!-- Decorative Atmosphere Blobs -->
+<div class="bg-blob w-[400px] h-[400px] bg-primary-container -top-20 -left-20"></div>
+<div class="bg-blob w-[300px] h-[300px] bg-secondary-container top-1/2 -right-20"></div>
+<!-- Top Navigation Bar -->
+<header class="bg-surface sticky top-0 z-40 w-full px-container-padding py-4 shadow-[0_10px_30px_rgba(58,103,88,0.1)]">
+<div class="flex justify-between items-center max-w-[1200px] mx-auto">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile md:text-headline-lg text-primary font-bold">PawPath</h1>
+<nav class="hidden md:flex items-center gap-4">
+<a class="text-primary font-bold border-b-4 border-primary rounded-full px-4 py-1 transition-transform duration-300 hover:scale-105 active:scale-95" href="#">Dashboard</a>
+<a class="text-on-surface-variant px-4 py-1 transition-transform duration-300 hover:scale-105 active:scale-95" href="#">Mis Mascotas</a>
+<a class="text-on-surface-variant px-4 py-1 transition-transform duration-300 hover:scale-105 active:scale-95" href="#">Perfil</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="w-10 h-10 rounded-full bg-cover bg-center clay-inset" data-alt="A friendly, close-up portrait of a veterinary professional smiling warmly, with soft high-key lighting. The background is a clean, modern clinic with pastel mint and white tones. The photography is professional with shallow depth of field, highlighting the person's approachable and caring expression." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBVaZbIYNLxx9_aWEok6b_yk3eKw4WcyE8-MeSangfon8WhVy0s83gEH76N_68p4UenidjNTHDCNmpK1w-sTT3WUR4vhytrHO-TcWZTod1ArAoceJYs6WeXNYOHYFl5H1YFt41s1tv1UDyS26-C0Zo8-z9ChBDTwv8azUYfibV5b6_4Ue2Um6Ru1JR_g-b8NApBmKuUw2rrzNFACEX66uTJ_piouss1HxdxxE4TZFt6-pUFKl-SrBEw')"></div>
+</div>
+</div>
+</header>
+<main class="max-w-[1200px] mx-auto px-container-padding py-10">
+<!-- Hero / Welcome Section -->
+<section class="mb-section-margin">
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-background mb-2">¡Hola, Carlos!</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Tienes 3 citas próximas para tus compañeros.</p>
+</section>
+<!-- Bento Grid Layout for Dashboard Content -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+<!-- Left Column: Appointments List (Main Focus) -->
+<div class="md:col-span-8 flex flex-col gap-6">
+<div class="flex items-center justify-between mb-4">
+<h3 class="font-headline-md text-headline-md text-primary">Próximas Citas</h3>
+<button class="md:hidden clay-button-primary px-6 py-3 rounded-full font-bold flex items-center gap-2">
+<span class="material-symbols-outlined">add</span>
+<span>Agendar</span>
+</button>
+</div>
+<!-- Appointment Card 1: Luna -->
+<div class="clay-card p-6 flex flex-col sm:flex-row items-center gap-6">
+<div class="w-24 h-24 rounded-full overflow-hidden clay-inset flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A beautiful white Samoyed dog named Luna with a joyful expression and tongue out, sitting in a sunny garden. The lighting is warm and golden, highlighting her fluffy fur. The style is soft and slightly stylized to fit a claymorphic aesthetic, with vibrant natural greens in the background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjNfkGT25iyQ6GuQVpuYg5xKoI0BT-HVK-kmpO6ZYzGKseHlUhl-Vtg3d32kaUWHp44BSedjhAKRBiVLa-Mk4y7Py8eVJzeoPfiIP6sVw4vpfBFsNeYmbD69M_1bkJzX1NS9Xl5OhZYLf5RlxalJ8DPeMS1GkUKBFblmOmnc5Zd2aJ1fHEmvQn5qUaFRiiS60aO114pTaNkvvlyoPf3jHx8apg8MUBK19FA7nADXpVK72ag7RI5dsS"/>
+</div>
+<div class="flex-grow text-center sm:text-left">
+<h4 class="font-headline-md text-headline-md text-on-surface">Luna</h4>
+<p class="text-secondary font-semibold">Vacunación Anual</p>
+<div class="flex flex-wrap justify-center sm:justify-start gap-4 mt-3">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-base">calendar_today</span>
+<span class="font-label-md text-label-md">15 de Octubre</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-base">schedule</span>
+<span class="font-label-md text-label-md">10:30 AM</span>
+</div>
+</div>
+</div>
+<button class="clay-inset p-3 rounded-2xl hover:bg-surface-variant transition-colors group">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">arrow_forward_ios</span>
+</button>
+</div>
+<!-- Appointment Card 2: Oliver -->
+<div class="clay-card p-6 flex flex-col sm:flex-row items-center gap-6">
+<div class="w-24 h-24 rounded-full overflow-hidden clay-inset flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A sleek, elegant ginger tabby cat named Oliver with bright green eyes, resting on a plush teal cushion. The lighting is soft and diffused, creating a serene and comfortable atmosphere. The focus is sharp on his curious eyes, with a blurred background of a modern home interior." src="https://lh3.googleusercontent.com/aida-public/AB6AXuACDfcfxtFbRSYKyQukt_svXjx-I40XaRYtWoXO9RTuUuHth18YVyip7i8wbgYl9exQS-lSdiANrGeVQ4Fn7QC-9USz5y9GOwJWwQuNM-VexVVSy7BLslfJ_agi-dLkpHTtwbK72iMzupH3G51DLf7eHgYBi4XMOOp5_qsdPmLXLHLyRbaYF0xOfGFsbc0S4wHX7S2McFersj8QWy5us9rVHg4PBm28gZ7kvS4vbo0Mypv2lQW3dord"/>
+</div>
+<div class="flex-grow text-center sm:text-left">
+<h4 class="font-headline-md text-headline-md text-on-surface">Oliver</h4>
+<p class="text-secondary font-semibold">Chequeo General</p>
+<div class="flex flex-wrap justify-center sm:justify-start gap-4 mt-3">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-base">calendar_today</span>
+<span class="font-label-md text-label-md">18 de Octubre</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-base">schedule</span>
+<span class="font-label-md text-label-md">04:15 PM</span>
+</div>
+</div>
+</div>
+<button class="clay-inset p-3 rounded-2xl hover:bg-surface-variant transition-colors group">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">arrow_forward_ios</span>
+</button>
+</div>
+<!-- Appointment Card 3: Max -->
+<div class="clay-card p-6 flex flex-col sm:flex-row items-center gap-6 opacity-80">
+<div class="w-24 h-24 rounded-full overflow-hidden clay-inset flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A small, spunky French Bulldog named Max wearing a stylish blue collar, sitting alertly on a clean clinic exam table. The lighting is professional and bright, giving a clean medical yet friendly vibe. The background shows hints of veterinary equipment in soft focus." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6Oi8mjsjEIg2yZmLDPOspx4heMIeAsmsY3MIeSRgMuL3eFcCQGbIofQN6ri4teZo3giHusVFPUeyHIo1M7cLLKTCvkwKDRsSY2kGehx2m6mqrZREwxs5y3ljVkkFWi4Aq6s9Hc8iIj_MR0ZuFiT--By6H_nno9yuqBTxkuyQRz__qAkTifhJMODcJdNJVbeqYso57SMHkndQ87OTGSINNerPMdNrBDOjnA1PgiYTgKR6Yq5JVWYFv"/>
+</div>
+<div class="flex-grow text-center sm:text-left">
+<h4 class="font-headline-md text-headline-md text-on-surface">Max</h4>
+<p class="text-secondary font-semibold">Limpieza Dental</p>
+<div class="flex flex-wrap justify-center sm:justify-start gap-4 mt-3">
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-base">calendar_today</span>
+<span class="font-label-md text-label-md">22 de Octubre</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-base">schedule</span>
+<span class="font-label-md text-label-md">09:00 AM</span>
+</div>
+</div>
+</div>
+<button class="clay-inset p-3 rounded-2xl hover:bg-surface-variant transition-colors group">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">arrow_forward_ios</span>
+</button>
+</div>
+</div>
+<!-- Right Column: Quick Stats & Booking -->
+<div class="md:col-span-4 flex flex-col gap-8">
+<!-- Prominent Booking Button -->
+<div class="clay-card bg-primary p-8 text-center text-white">
+<span class="material-symbols-outlined text-5xl mb-4" style="font-variation-settings: 'FILL' 1;">calendar_add_on</span>
+<h3 class="font-headline-md text-headline-md mb-4">¿Necesitas una consulta?</h3>
+<button class="clay-button-primary bg-white !text-primary w-full py-4 rounded-xl font-bold text-lg hover:scale-105 active:scale-95 transition-transform">
+                        Agendar Cita
+                    </button>
+</div>
+<!-- Pet Health Summary -->
+<div class="clay-card p-6">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-6">Estado de Salud</h3>
+<div class="space-y-4">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl clay-inset flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">pets</span>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between mb-1">
+<span class="font-label-md text-label-md">Luna</span>
+<span class="font-label-sm text-label-sm text-primary">Excelente</span>
+</div>
+<div class="w-full h-2 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[95%]"></div>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl clay-inset flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">pets</span>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between mb-1">
+<span class="font-label-md text-label-md">Oliver</span>
+<span class="font-label-sm text-label-sm text-secondary">Normal</span>
+</div>
+<div class="w-full h-2 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[80%]"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Custom Paws Rating/Progress Component -->
+<div class="clay-card p-6 flex flex-col items-center">
+<p class="font-label-md text-label-md text-on-surface-variant mb-4">Tu nivel como dueño</p>
+<div class="flex gap-2">
+<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">pets</span>
+<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">pets</span>
+<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">pets</span>
+<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">pets</span>
+<span class="material-symbols-outlined text-surface-container-highest text-3xl">pets</span>
+</div>
+<p class="mt-4 font-label-sm text-label-sm text-primary">¡Vas por buen camino!</p>
+</div>
+</div>
+</div>
+</main>
+<!-- Floating Action Button (FAB) for Mobile -->
+<button class="md:hidden fixed bottom-24 right-6 w-16 h-16 clay-button-primary rounded-full flex items-center justify-center z-50">
+<span class="material-symbols-outlined text-3xl">add</span>
+</button>
+<!-- Bottom Navigation Bar (Mobile) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 bg-surface-container px-4 py-3 pb-safe flex justify-around items-center shadow-[0_-10px_30px_rgba(0,0,0,0.05)] rounded-t-lg">
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl px-6 py-2 shadow-[4px_4px_10px_rgba(0,0,0,0.1)] transition-all active:scale-90" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md mt-1">Inicio</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-6 py-2 transition-all hover:bg-surface-bright active:scale-90" href="#">
+<span class="material-symbols-outlined">pets</span>
+<span class="font-label-md text-label-md mt-1">Mascotas</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-6 py-2 transition-all hover:bg-surface-bright active:scale-90" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md mt-1">Perfil</span>
+</a>
+</nav>
+<script>
+        // Micro-interaction: Scale down cards slightly when clicking/touching
+        document.querySelectorAll('.clay-card').forEach(card => {
+            card.addEventListener('mousedown', () => {
+                card.style.transform = 'scale(0.98)';
+            });
+            card.addEventListener('mouseup', () => {
+                card.style.transform = '';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = '';
+            });
+        });
+
+        // Floating Action Button interaction
+        const fab = document.querySelector('.clay-button-primary.fixed');
+        if (fab) {
+            fab.addEventListener('click', () => {
+                // Future expansion: Open booking modal
+                fab.classList.toggle('rotate-45');
+            });
+        }
+    </script>
+</body></html>
